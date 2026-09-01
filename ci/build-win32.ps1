@@ -310,7 +310,7 @@ meson setup build `
     -Dffmpeg:tests=enabled `
     -Dffmpeg:programs=enabled `
     -Dffmpeg:sdl2=disabled `
-    -Dffmpeg:vulkan=auto `
+    -Dffmpeg:vulkan=disabled `
     -Dffmpeg:libdav1d=enabled `
     -Dffmpeg:libjxl=enabled `
     -Dffmpeg:libaom=enabled `
@@ -326,7 +326,7 @@ meson setup build `
     -Dlibplacebo:lcms=enabled `
     -Dlibplacebo:shaderc=enabled `
     -Dlibplacebo:tests=false `
-    -Dlibplacebo:vulkan=enabled `
+    -Dlibplacebo:vulkan=disabled `
     -Dlibplacebo:d3d11=enabled `
     -Dlibpsl:tests=false `
     -Dxxhash:inline-all=true `
@@ -335,7 +335,7 @@ meson setup build `
     -Damf=enabled `
     -Dd3d11=enabled `
     -Dsubrandr=enabled `
-    -Dvulkan=enabled `
+    -Dvulkan=disabled `
     -Djavascript=enabled `
     -Dwin32-smtc=enabled `
     -Dlua=luajit `
@@ -345,6 +345,5 @@ meson setup build `
     -Dwayland=disabled `
     -Dx11=disabled
 ninja -C build mpv.exe mpv.com
-cp ./build/subprojects/vulkan-loader/vulkan.dll ./build/vulkan-1.dll
 cp ./etc/mpv-*.bat ./build
 ./build/mpv.com -v --no-config
