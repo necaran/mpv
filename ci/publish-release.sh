@@ -109,6 +109,13 @@ $(section 'macos')
 NOTES
 )
 
+title='mpv development build'
+[ "${GITHUB_REF_NAME%/*}" = 'refs/heads/release' ] && {
+  tag=v${GITHUB_REF_NAME##*/}
+  title=$tag
+  note=''
+}
+
 # Create the release once (which also creates the tag), then only edit it in
 # place so watchers aren't notified on every master push. Stale assets are
 # dropped first since their names embed the run id.
@@ -118,17 +125,16 @@ if gh release view "$tag" >/dev/null 2>&1; then
         gh release delete-asset "$tag" "$asset" --yes
     done
     gh release edit "$tag" \
-        --prerelease \
-        --latest=false \
-        --title "mpv development build" \
+        --target "$GITHUB_REF_NAME" \
+        --draft \
+        --title "$title" \
         --notes "$notes"
     gh release upload "$tag" release/*
 else
     gh release create "$tag" \
-        --target "$GITHUB_SHA" \
-        --prerelease \
-        --latest=false \
-        --title "mpv development build" \
+        --target "$GITHUB_REF_NAME" \
+        --draft \
+        --title "$title" \
         --notes "$notes" \
         release/*
 fi
